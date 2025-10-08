@@ -22,6 +22,7 @@ function normalFunction() {
 
 console.log(normalFunction()); // 🍎 Apple
 
+
 ➡️ It gives only one value and finishes.
 
 🔸 Generator Function
@@ -77,6 +78,7 @@ The yield keyword is like a pause point — it returns one value at a time. -->
     function nextStep() {
       const result = fruitGenerator.next(); // move to next yield
       document.getElementById("output").innerHTML = result.value;
+      console.log(result);
     }
   </script>
 </body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Worker Example</title>
+</head>
+<body>
+  <h2>⚙️ Web Worker Example</h2>
+  <p>Count numbers without freezing the page:</p>
+
+  <output id="result"></output><br><br>
+  <button onclick="startWorker()">Start Worker</button>
+  <button onclick="stopWorker()">Stop Worker</button>
+
+  <script>
+    let w;
+
+    function startWorker() {
+      if (typeof(Worker) !== "undefined") {
+        if (typeof(w) == "undefined") {
+          w = new Worker("worker.js");
+        }
+        w.onmessage = function(event) {
+          document.getElementById("result").innerHTML = "Count: " + event.data;
+        };
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser doesn't support Web Workers.";
+      }
+    }
+
+    function stopWorker() {
+      w.terminate();
+      w = undefined;
+    }
+  </script>
+</body>
+</html>
+
+<!-- 💡 Here, even though counting happens continuously, your webpage won’t freeze — because it runs in the background thread.
+
+📍Real-Life Use Cases:
+
+Running large calculations (like data analysis, crypto mining)
+
+Handling file uploads
+
+Doing AI/ML tasks in the browser
+
+Real-time game updates or chat message handling -->
